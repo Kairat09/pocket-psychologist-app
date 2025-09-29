@@ -72,7 +72,7 @@ nest-asyncio==1.6.0
 networkx==3.5
 notebook_shim==0.2.4
 numba==0.62.0
-numpy==2.3.3
+numpy<2
 packaging==25.0
 pandas==2.3.2
 pandocfilters==1.5.1
@@ -135,6 +135,7 @@ wcwidth==0.2.14
 webcolors==24.11.1
 webencodings==0.5.1
 websocket-client==1.8.0
+
 
 
 
