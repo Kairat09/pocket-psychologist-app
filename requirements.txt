@@ -1,5 +1,5 @@
 --find-links https://download.pytorch.org/whl/cpu/torch_stable.html
-torch==2.1.2+cpu
+torch==2.1.2
 altair==5.5.0
 anyio==4.11.0
 argon2-cffi==25.1.0
@@ -124,7 +124,7 @@ toml==0.10.2
 tornado==6.5.2
 tqdm==4.67.1
 traitlets==5.14.3
-transformers==4.56.2
+transformers==4.36.2
 types-python-dateutil==2.9.0.20250822
 typing_extensions==4.15.0
 tzdata==2025.2
@@ -135,5 +135,6 @@ wcwidth==0.2.14
 webcolors==24.11.1
 webencodings==0.5.1
 websocket-client==1.8.0
+
 
 
