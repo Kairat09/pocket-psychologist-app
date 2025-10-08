@@ -67,8 +67,6 @@ def save_to_journal(text, zeroshot_results, specialized_emotions, recommendation
 st.set_page_config(layout="wide")
 st.title("🎧 Карманный психолог")
 
-st.markdown("""<style> .stDataFrame div[data-testid="stVerticalBlock"] { white-space: normal !important; line-height: 1.5 !important; } </style>""", unsafe_allow_html=True)
-
 if 'analysis_results' not in st.session_state:
     st.session_state.analysis_results = None
 
