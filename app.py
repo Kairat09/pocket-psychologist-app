@@ -26,7 +26,7 @@ def load_speech_model():
     """Загружает ТОЛЬКО модель распознавания речи."""
     print("Загрузка модели Whisper...")
     device = "cuda:0" if torch.cuda.is_available() else "cpu"
-    speech_recognizer = pipeline("automatic-speech-recognition", model="openai/whisper-base", device=device)
+    speech_recognizer = pipeline("automatic-speech-recognition", model="openai/whisper-base", device=device, task="transcribe")
     print("Модель Whisper загружена.")
     return speech_recognizer
 
