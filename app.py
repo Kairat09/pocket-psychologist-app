@@ -67,15 +67,7 @@ def save_to_journal(text, zeroshot_results, specialized_emotions, recommendation
 st.set_page_config(layout="wide")
 st.title("🎧 Карманный психолог")
 
-# --- CSS-ТРЮК ДЛЯ ВЫСОТЫ СТРОК ---
-st.markdown("""
-<style>
-    .stDataFrame div[data-testid="stVerticalBlock"] {
-        white-space: normal !important;
-        line-height: 1.5 !important;
-    }
-</style>
-""", unsafe_allow_html=True)
+st.markdown("""<style> .stDataFrame div[data-testid="stVerticalBlock"] { white-space: normal !important; line-height: 1.5 !important; } </style>""", unsafe_allow_html=True)
 
 if 'analysis_results' not in st.session_state:
     st.session_state.analysis_results = None
@@ -95,7 +87,8 @@ with tab1:
             with st.spinner("Этап 1/2: Распознаю речь... (может занять несколько минут)"):
                 speech_recognizer = load_speech_model()
                 audio_bytes = uploaded_file.getvalue()
-                transcribed_text = speech_recognizer(audio_bytes, return_timestamps=True)["text"]
+                # 👇👇👇 ВОТ ИЗМЕНЕНИЕ ДЛЯ ПОЧИНКИ АВТООПРЕДЕЛЕНИЯ ЯЗЫКА 👇👇👇
+                transcribed_text = speech_recognizer(audio_bytes, return_timestamps=True, chunk_length_s=30)["text"]
                 del speech_recognizer
                 gc.collect()
             
