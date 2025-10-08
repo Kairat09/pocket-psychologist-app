@@ -26,7 +26,8 @@ def load_speech_model():
     """Загружает ТОЛЬКО модель распознавания речи."""
     print("Загрузка модели Whisper...")
     device = "cuda:0" if torch.cuda.is_available() else "cpu"
-    speech_recognizer = pipeline("automatic-speech-recognition", model="openai/whisper-base", device=device, task="transcribe")
+    # 👇👇👇 УБРАЛИ task="transcribe" ОТСЮДА 👇👇👇
+    speech_recognizer = pipeline("automatic-speech-recognition", model="openai/whisper-base", device=device)
     print("Модель Whisper загружена.")
     return speech_recognizer
 
@@ -87,8 +88,13 @@ with tab1:
             with st.spinner("Этап 1/2: Распознаю речь... (может занять несколько минут)"):
                 speech_recognizer = load_speech_model()
                 audio_bytes = uploaded_file.getvalue()
-                # 👇👇👇 ВОТ ИЗМЕНЕНИЕ ДЛЯ ПОЧИНКИ АВТООПРЕДЕЛЕНИЯ ЯЗЫКА 👇👇👇
-                transcribed_text = speech_recognizer(audio_bytes, return_timestamps=True, chunk_length_s=30)["text"]
+                # 👇👇👇 ВОТ ФИНАЛЬНОЕ ИСПРАВЛЕНИЕ 👇👇👇
+                # Явно указываем язык и оставляем обработку длинных аудио
+                transcribed_text = speech_recognizer(
+                    audio_bytes, 
+                    chunk_length_s=30, 
+                    generate_kwargs={"task": "transcribe"}
+                )["text"]
                 del speech_recognizer
                 gc.collect()
             
